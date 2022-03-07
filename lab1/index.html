@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>    
+  
+    .text-ind {
+      text-indent: 20px;
+    }
+    
+    
+    #title {
+      font-family: 'Luckiest Guy', Monospace;
+      font-size: 28px;
+      color: rgb(163, 109, 8);
+      background-color: silver;
+      margin: 10mm 50mm 10mm 50mm;
+    }
+    
+    #image {
+      width: 400px;
+      border: 10px solid #F68F05;
+      border-radius: 10%;
+    }
+    
+    body {
+      background-image: url('https://s3.envato.com/files/229437798/preview.jpg');
+      font-family: Verdana;
+      font-size: 14px;
+    }
+    
+    p {
+      background-color: rgb(231, 188, 63);
+    }
+    
+    ul {
+     columns: 3;
+     -webkit-columns: 3;
+     -moz-columns: 2;
+     background-color: rgb(231, 188, 63);
+    }
+    
+  .hiddentxt {
+    font-weight: bold;
+    color: #F00;
+    z-index:99;
+    }
+    
+  .hiddenimg {
+    display: none;
+    }
+    
+  .hiddentxt:hover ~ .hiddenimg {
+    display: block;
+    position: absolute;
+    z-index: 2
+   }
+   
+  </style>
+  
+  <center>
+      <head>
+        <h1 id="title" >Cheese Ipsum</h1>
+      </head>
+  </center>
+  
+  <body>
+
+    <p class="text-ind">I love cheese, especially cheese strings mozzarella. Emmental gouda ricotta gouda blue castello queso queso cow. Cauliflower cheese cheeseburger everyone loves gouda jarlsberg fondue blue castello the big cheese. Stilton hard cheese cheesecake rubber cheese smelly cheese st. agur blue cheese fromage cauliflower cheese. Hard cheese edam cheese and biscuits danish fontina.
+    </p>
+    <p class="text-ind">
+    Cottage cheese dolcelatte cheese and biscuits. Cow lancashire cheese and biscuits hard cheese lancashire squirty cheese cheeseburger pepper jack. Mascarpone cottage cheese halloumi mozzarella edam cream cheese cheese on toast babybel. Smelly cheese squirty cheese paneer cauliflower cheese who moved my cheese monterey jack smelly cheese airedale. Smelly cheese cauliflower cheese goat st. agur blue cheese.
+   </p>    
+   
+   <center>
+    <ul>
+      <li><span class="hiddentxt">
+        <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/WikiCheese_-_Gouda_36_mois_03.jpg/1280px-WikiCheese_-_Gouda_36_mois_03.jpg">Gouda</a>
+        </span>
+        <span class="hiddenimg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/WikiCheese_-_Gouda_36_mois_03.jpg/1280px-WikiCheese_-_Gouda_36_mois_03.jpg" width="250" />
+          </span></li>
+      <li>Mozzarella</li>
+      <li>Ricotta</li>
+      <li>Cheddar</li>
+      <li>Emmental</li>
+      <li>Blue castello</li>
+    </ul>
+  </center>
+  
+  <center>
+  <a href="https://en.wikipedia.org/wiki/Wallace_and_Gromit" target="_blank"><img id="image" src="https://egaga.pl/wp-content/uploads/2014/06/rexfeatures-wallace-gromit-jpg_091957.jpg" alt="Wallace and Gromit"></a>
+  </center>
+  </body>
+  
+</html>
