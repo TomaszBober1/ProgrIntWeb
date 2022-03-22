@@ -1,0 +1,44 @@
+div{
+    margin-left: 150px;
+    display: inline-block;
+    width: 200px;
+}
+.active{
+  text-decoration: line-through;
+  text-decoration-color: black;
+}
+
+li{
+  max-width: 400px;
+  margin-left: 150px;
+}
+
+section{
+  margin-left: 210px;
+ /*  margin-top: -34px;
+ max-height: 50px;*/
+  width: 150px;
+}
+
+.cl_button{
+  color: transparent;
+  margin-left: 400px;
+}
+
+.in_class{
+  width: 400px;
+  margin-left: 150px;
+  margin-top: 30px;
+}
+
+.button_marg{
+  margin-left: 500px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button_marg_pos{
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

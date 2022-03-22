@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<title>Lista dynamiczna</title>
+		<script src = "trial.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous">
+		</script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="styles.css">
+
+		<meta charset="UTF-8" >
+		<style>
+			#modal_remove{
+				display: none;
+                z-index: 1;
+                position: fixed;
+                background-color: rgba(0, 0, 0, 0.7);
+                width: 100%;
+                height: 100%;
+                left: -150;
+                top: 0;
+				text-align: center;
+			}
+			#modal_conf{
+				background-color: green;
+			}
+		</style>
+		</head>
+	<body class="p-3 mb-2 bg-success text-white">
+	<h1 class = "page-header">Lista ToDO</h1>
+	<input class="form-control in_class" type="text" id="newPos"/>
+	<button class="button_marg_pos btn btn-warning" onclick="addPos()">Nowa pozycja</button>
+
+    <ul class="list-group" id="ListaZak"></ul>
+	<button onclick="undo()" class="button_marg btn btn-warning">Undo</button>
+	<div id="modal_remove" >
+		<p class="allign-bottom">Czy na pewno chcesz usunąć?</p>
+		<p class="allign-bottom">Jeśli tak kliknij przycisk, w przeciwnym razie kliknij myszką na wyszarzone tło.</p>
+		<button id="modal_conf" class="allign-bottom btn btn-success" >TAK</button>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	</body>
+</html>
