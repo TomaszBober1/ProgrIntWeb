@@ -1,115 +1,63 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "../context/AuthContext";
-import useLocalStorage from '../Components/LocalStorageHook';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase/init";
+import {logInWithEmailAndPassword, logInWithGoogle, logInWithGitHub } from "../firebase/users";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const Login = () => {
-    const { auth, setAuth } = useContext(AuthContext);
-    const userRef = useRef();
-    const errRef = useRef();
 
-    const [userData, setUserData] = useState([]);
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-    const [userL, setUserL] = useLocalStorage("");
+function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [user, loading, error] = useAuthState(auth);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        userRef.current.focus();
-    }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
-
-
-      useEffect(() => {
-        axios.get("http://localhost:3000/dataF/users.json").then(res => {
-          const userdata = res.data;
-          setUserData(userdata);
-        });
-      },[]);
-
-    const handleSubmit = async (e) => {
-
-        e.preventDefault();
-        let a = localStorage.getItem('session');
-        if(AuthContext.Provider.length !== 5){
-            if(userData.some(e => e.login === user) && userData.some(e => e.password === pwd)){
-                setAuth({ user});
-                setUserL(user);
-                setUser('');
-                setPwd('');
-                AuthContext.Provider.length = 5;
-                setSuccess(true);
-                
-            } else if(a.includes(user) && a.includes(pwd)){
-                setAuth({ user});
-                setUserL(user);
-                setUser('');
-                setPwd('');
-                AuthContext.Provider.length = 5;
-                setSuccess(true);
-            } else {
-                alert("Wrong data!");
-                setSuccess(false);
-            }
-        }else{
-            alert("You are already logged in")
-        }
-    }
-
-    const logout = async (e) => {
-        if(AuthContext.Provider.length === 5){
-            AuthContext.Provider.length = 0;
-            setSuccess(false);
-            alert("Logged out");
-            setUserL();
-        }else{
-            alert("You are not logged in")
-        }
-    }
+        if (loading)
+            return
+        if (user)
+            navigate("/");
+        if(error)
+            console.error({error});
+        }, [user, loading]);
 
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1>Jesteś zalogowany!</h1>
-                    <button onClick={logout}>Wyloguj</button>
-                    <br />
-                </section>
-            ) : (
-                <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>zaloguj</h1>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Nazwa użytkownika:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                        />
+    <div className="login">
 
-                        <label htmlFor="password">Hasło:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                        />
-                        <button>Zaloguj</button>
-                    </form>
-                        <button onClick={logout}>Wyloguj</button>
-                </section>
-            )}
-        </>
-    )
+        <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-mail Address"
+        />
+        <br/>
+        <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+        />
+        <br/>
+        <button
+           onClick={() => logInWithEmailAndPassword(email, password)}
+        >
+            Login
+        </button>
+        <br/>
+        <button onClick={logInWithGoogle}>
+            Login with Google
+        </button>
+        <br/>
+        <button onClick={logInWithGitHub}>
+            Login with GitHub
+        </button>
+        <br/>
+        <div>
+            Don't have an account? <Link to="/register">Register</Link> now.
+        </div>
+
+    </div>
+    );
 }
-
-export default Login
+export default Login;

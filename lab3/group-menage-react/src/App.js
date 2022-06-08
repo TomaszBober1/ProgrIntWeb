@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { useState} from "react";
 import './App.css';
 import Annoucement from "./Pages/Annoucement";
@@ -10,9 +10,13 @@ import SearchGroup from "./Pages/SearchGroups";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import axios from 'axios';
-import AnnoucementInfo from './Pages/AnnoucementInfo';
+
+import { auth } from "./firebase/init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { logout } from "./firebase/users"
 function App() {
 
+  const [userInny] = useAuthState(auth);
 
 
   const [annouData, setAnnouData] = useState([]);
@@ -46,6 +50,7 @@ const shareSubmit = (Annouc_display) => {
       
       <BrowserRouter>
        <NavBar></NavBar> 
+       {userInny && <button onClick={logout}>Log out {userInny.displayName || userInny.email} </button> || <NavLink to="/login">Log in</NavLink>}
        <Routes>
           <Route exact path="/new-group" element={<NewGroup />}/>
           <Route exact path="/annoucements" element={<Annoucement annouData={annouData} shareSubmit={shareSubmit} />}/>
@@ -53,7 +58,7 @@ const shareSubmit = (Annouc_display) => {
           <Route exact path="/search-groups" element={<SearchGroup groupData={groupData}/>}/>
           <Route exact path="/login" element={<Login />}/>
           <Route exact path="/register" element={<Register />}/>
-          <Route exact path="/ann-info" element={<AnnoucementInfo />}/>
+          
         </Routes>
       </BrowserRouter>
     </div>
